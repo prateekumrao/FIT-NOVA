@@ -1,0 +1,33 @@
+/* ========================================
+   styles/index.css
+   Purpose: Tailwind layers + a few global styles (background, focus ring, scrollbar).
+   ======================================== */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    background-image: radial-gradient(900px 480px at 85% -10%, rgba(120, 151, 124, 0.14), transparent 60%);
+    background-attachment: fixed;
+  }
+  /* Visible keyboard focus for accessibility */
+  :focus-visible { outline: 2px solid #92c197; outline-offset: 2px; }
+  ::selection { background: rgba(183, 216, 184, 0.3); }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: #29352D; border-radius: 8px; }
+}
+
+@layer utilities {
+  /* Hide scrollbar for horizontal chip rows on mobile */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+  .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
